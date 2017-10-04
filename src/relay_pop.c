@@ -38,7 +38,7 @@ int main(){
   /* find tor process */
   pid = determine_pid(TOR_PROC_NAME);
   if(pid == -1){
-    printf("could not find running tor process...\n");
+    printf("[*] Could not find running tor process...\n");
     exit(0);
   }
   printf("[*] Found running Tor process (%d)\n", pid);
@@ -50,7 +50,7 @@ int main(){
     if(~tor_running){
       pid = determine_pid(TOR_PROC_NAME);
       if(pid == -1){
-        printf("Tor is no longer running...\n");
+        printf("[*] Tor is no longer running...\n");
         fclose(relays);
         exit(0);
       }
@@ -62,7 +62,7 @@ int main(){
     } else{
       relays = fopen("/proc/tor_relays", "w");
       if(relays == NULL){
-        printf("kernel modules not loaded\n");
+        printf("[*] Kernel modules not loaded\n");
         exit(0);
       }
       for(i=0; i<MAX_RELAY; i++){
