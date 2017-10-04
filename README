@@ -7,20 +7,17 @@
                                        __/ |
                                       |___/
 
-TorProxy is kernel module which routes all network traffic through the Tor anonimity network.
+TorProxy is kernel module which routes all network traffic through the Tor anonymity network.
 
-The module uses netfilter hooks in the linux kernel to filter/NAT packets and ensure all outbound traffic is headed for the tor network.
+The module uses netfilter hooks in the linux kernel to filter/NAT packets and ensure all outbound traffic is headed for the Tor network.
 
-The Tor network currently only supports TCP ipv4 traffic so all other protocol packets are dropped. This means no ICMP pings, ipv6 or UDP packets are allowed.
+The Tor network currently only supports TCP ipv4 traffic so all other protocol packets are dropped, with the exception of DNS packets, these are allowed and are forwarded to the TorDNS proxy to prevent DNS leaks.
 
-With the exception of DNS packets used for requests, these are allowed and are forwarded to the TorDNS proxy to prevent DNS leaks.
+This means no ICMP pings, ipv6, UDP etc...
 
 Applications do not have to be configured to use the proxy as it uses Tors transparent proxy and NAT's all outbound TCP requests.
 
 Access to hidden services still has to be performed through the Tor browser.
-
-
-
 
 
 Installation:
@@ -33,7 +30,7 @@ Installation:
 
     make install
 
-ensure you have the Tor DNS and Transparent Tor proxy running on the following ports:
+  ensure you have the Tor DNS and Transparent Tor proxy running on the following ports:
 
     add to your torrc configuration file:
 
@@ -42,11 +39,7 @@ ensure you have the Tor DNS and Transparent Tor proxy running on the following p
 
 Usage:
 
-  The proxy must be run as root and Tor must be running:
-
-      ./torproxy
-
-  Insert the module and your done! Remember to remove the module when you want regular internet access. 
+  The proxy must be run as root and Tor must be running. Insert the module and your done! Remember to remove the module when you want regular internet access.
   If Tor chooses a new entry relay you may need to refresh the relays table in the module using '-r'.
 
   options:
