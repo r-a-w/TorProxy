@@ -1,12 +1,12 @@
-  _______         _____
- |__   __|       |  __ \
-    | | ___  _ __| |__) | __ _____  ___   _
-    | |/ _ \| '__|  ___/ '__/ _ \ \/ / | | |
-    | | (_) | |  | |   | | | (_) >  <| |_| |
-    |_|\___/|_|  |_|   |_|  \___/_/\_\\__, |
-                                       __/ |
-                                      |___/
-
+  _______         _____  
+ |__   __|       |  __ \  
+    | | ___  _ __| |__) | __ _____  ___   _  
+    | |/ _ \| '__|  ___/ '__/ _ \ \/ / | | |  
+    | | (_) | |  | |   | | | (_) >  <| |_| |  
+    |_|\___/|_|  |_|   |_|  \___/_/\_\\__, |  
+                                       __/ |  
+                                      |___/  
+  
 *TorProxy is kernel module which routes all network traffic through the Tor anonymity network.*
 
 The module uses netfilter hooks in the linux kernel to filter/NAT packets and ensure all outbound traffic is headed for the Tor network.
@@ -43,7 +43,7 @@ The proxy must be run as root and Tor must be running. Insert the module and you
 
 If Tor chooses a new entry relay you may need to refresh the relays table in the module using '-r'.
 
-##options:
+## Arguments:
 
     -s insert module and start proxy  
     -i insert torproxy kernel module  
