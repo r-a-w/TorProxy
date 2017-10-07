@@ -43,10 +43,10 @@ The proxy must be run as root and Tor must be running. Insert the module and you
 
 If Tor chooses a new entry relay you may need to refresh the relays table in the module using '-r'.
 
-  options:
-     -s insert module and start proxy
-     -i insert torproxy kernel module
-     -r remove torproxy kernel module
+##options:
+     -s insert module and start proxy  
+     -i insert torproxy kernel module  
+     -r remove torproxy kernel module  
      -t refresh tor relays table
 
 
