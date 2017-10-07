@@ -1,14 +1,13 @@
-<div style="white-space: pre-wrap;">
-  _______         _____&#10
- |__   __|       |  __ \&#10
-    | | ___  _ __| |__) | __ _____  ___   _ &#10
-    | |/ _ \| '__|  ___/ '__/ _ \ \/ / | | |&#10
-    | | (_) | |  | |   | | | (_) >  <| |_| |&#10
-    |_|\___/|_|  |_|   |_|  \___/_/\_\\__, |&#10
-                                       __/ |&#10
-                                      |___/ &#10
-  
-</div>
+      
+      _______         _____  
+     |__   __|       |  __ \  
+        | | ___  _ __| |__) | __ _____  ___   _  
+        | |/ _ \| '__|  ___/ '__/ _ \ \/ / | | |  
+        | | (_) | |  | |   | | | (_) >  <| |_| |  
+        |_|\___/|_|  |_|   |_|  \___/_/\_\\__, |  
+                                           __/ |  
+                                          |___/  
+      
 *TorProxy is kernel module which routes all network traffic through the Tor anonymity network.*
 
 The module uses netfilter hooks in the linux kernel to filter/NAT packets and ensure all outbound traffic is headed for the Tor network.
