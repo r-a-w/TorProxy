@@ -1,3 +1,4 @@
+<div>
   _______         _____  
  |__   __|       |  __ \  
     | | ___  _ __| |__) | __ _____  ___   _  
@@ -7,6 +8,7 @@
                                        __/ |  
                                       |___/  
   
+</div>
 *TorProxy is kernel module which routes all network traffic through the Tor anonymity network.*
 
 The module uses netfilter hooks in the linux kernel to filter/NAT packets and ensure all outbound traffic is headed for the Tor network.
@@ -44,7 +46,6 @@ The proxy must be run as root and Tor must be running. Insert the module and you
 If Tor chooses a new entry relay you may need to refresh the relays table in the module using '-r'.
 
 ## Arguments:
-
     -s insert module and start proxy  
     -i insert torproxy kernel module  
     -r remove torproxy kernel module  
