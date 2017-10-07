@@ -22,31 +22,31 @@ Access to hidden services still has to be performed through the Tor browser.
 
 # Installation:
 
-  ## To build:
+## To build:
 
-    > make
+> make
 
-    you can either run the proxy portably within the folder after compilation or install using:
+you can either run the proxy portably within the folder after compilation or install using:
 
-    > make install
+> make install
 
-  ensure you have the Tor DNS and Transparent Tor proxy running on the following ports:
+ensure you have the Tor DNS and Transparent Tor proxy running on the following ports:
 
-    add to your torrc configuration file:
+add to your torrc configuration file:
 
-    >DNSPort 9053
-    >TransPort 9040
+> DNSPort 9053
+> TransPort 9040
 
 # Usage:
 
-  The proxy must be run as root and Tor must be running. Insert the module and your done! Remember to remove the module when you want regular internet access.
-  If Tor chooses a new entry relay you may need to refresh the relays table in the module using '-r'.
+The proxy must be run as root and Tor must be running. Insert the module and your done! Remember to remove the module when you want regular internet access.
+If Tor chooses a new entry relay you may need to refresh the relays table in the module using '-r'.
 
-  ## options:
-        ### -s insert module and start proxy
-        ### -i insert torproxy kernel module
-        ### -r remove torproxy kernel module
-        ### -t refresh tor relays table
+## options:
+### -s insert module and start proxy
+### -i insert torproxy kernel module
+### -r remove torproxy kernel module
+### -t refresh tor relays table
 
 
 
