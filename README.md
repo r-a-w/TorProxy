@@ -20,6 +20,8 @@ Applications do not have to be configured to use the proxy as it uses Tors trans
 
 Access to hidden services still has to be performed through the Tor browser.
 
+Tested on Debian kernel version 3.16.0-4, you will need to have the linux-headers.
+
 
 # Installation:
 
