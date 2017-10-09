@@ -38,7 +38,7 @@ MODULE_LICENSE("GPL");
 #define IP_NAT_RANGE_PROTO_SPECIFIED (1 << 1)
 
 /* netfilter hook registration */
-static struct nf_hook_ops nfho_local_out, nfho_pre_routing, nfho_forward;
+static struct nf_hook_ops nfho_local_out, nfho_pre_routing, nfho_forward, nfho_ipv6;
 
 /* for kernel thread */
 struct task_struct *task;
@@ -371,6 +371,17 @@ unsigned int forward_hook_func(unsigned int hooknum,
   return NF_DROP;
 }
 
+/* Drop all ipv6 traffic */
+unsigned int ipv6_hook_func(unsigned int hooknum,
+    struct sk_buff *skb,
+    const struct net_device *in,
+    const struct net_device *out,
+    int (*okfn)(struct sk_buff *))
+{
+  return NF_DROP;
+}
+
+
 /* Thread for clearing NAT table every 30 seconds */
 int purge_relays_th(void *data){
   struct timespec ts;
@@ -444,6 +455,12 @@ int init_module(){
   nfho_forward.pf = PF_INET;
   nfho_forward.priority = NF_IP_PRI_FIRST;
   nf_register_hook(&nfho_forward);
+
+  nfho_ipv6.hook = (nf_hookfn *) ipv6_hook_func;
+  nfho_ipv6.hooknum = NF_INET_PRE_ROUTING;
+  nfho_ipv6.pf = PF_INET6;
+  nfho_ipv6.priority = NF_IP_PRI_FIRST;
+  nf_register_hook(&nfho_ipv6);
 
 
   printk(KERN_INFO "Tor Proxy module inserted\n");
