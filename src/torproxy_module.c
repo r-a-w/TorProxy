@@ -18,6 +18,7 @@
 #include <linux/types.h>
 #include <linux/kthread.h>
 #include <linux/time.h>
+#include <linux/version.h>
 #include <net/ip.h>
 #include <net/netfilter/nf_conntrack_core.h>
 #include <uapi/linux/netfilter/nf_nat.h>
@@ -129,7 +130,8 @@ unsigned int local_out_hook_func(unsigned int hooknum,
     struct sk_buff *skb,
     const struct net_device *in,
     const struct net_device *out,
-    int (*okfn)(struct sk_buff *))
+    int (*okfn)(struct sk_buff *),
+    struct xt_action_param *param)
 {
   int i, err, len, offset;
   unsigned int ret;
@@ -197,7 +199,12 @@ unsigned int local_out_hook_func(unsigned int hooknum,
       }
 
       /* re-route mangled packets */
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4,4,0)
+      err = ip_route_me_harder(param->state->net, skb, RTN_UNSPEC);
+#else
       err = ip_route_me_harder(skb, RTN_UNSPEC);
+#endif
+
       if(err < 0){
        return NF_DROP;
       }
@@ -254,7 +261,12 @@ unsigned int local_out_hook_func(unsigned int hooknum,
 
 
       /* re-route mangled packets */
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4,4,0)
+      err = ip_route_me_harder(param->state->net, skb, RTN_UNSPEC);
+#else
       err = ip_route_me_harder(skb, RTN_UNSPEC);
+#endif
+
       if(err < 0){
         printk("Error rerouting packet\n");
         return NF_DROP;
