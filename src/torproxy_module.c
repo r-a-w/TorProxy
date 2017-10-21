@@ -476,6 +476,7 @@ void cleanup_module(){
   nf_unregister_hook(&nfho_local_out);
   nf_unregister_hook(&nfho_pre_routing);
   nf_unregister_hook(&nfho_forward);
+  nf_unregister_hook(&nfho_ipv6);
 
   /* remove /proc/tor_relays */
   proc_remove(proc_entry);

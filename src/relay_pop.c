@@ -254,28 +254,25 @@ int check_ip_is_relay(int ip){
     }
   }
 
+  /* Relay file not found in environment so check default install location */
   if(c == EOF){
-    free(environ_path);
-    free(tor_data_path);
-    free(buf);
-    printf("error parsing environment for tor\n");
-    exit(0);
-  }
-
-  /* read equal sign */
-  getc(file);
-  i = 0;
-  while((c != EOF) & (c != 0x00)){
-    c = getc(file);
-    tor_data_path[i] = c;
-    i++;
-    if(i>=500){
-      printf("overflow protection, in retrieving tor data directory path\n");
-      exit(0);
+    sprintf(tor_data_path, "/var/lib/tor");
+  } else {
+    /* read equal sign */
+    getc(file);
+    i = 0;
+    while((c != EOF) & (c != 0x00)){
+      c = getc(file);
+      tor_data_path[i] = c;
+      i++;
+      if(i>=500){
+        printf("overflow protection, in retrieving tor data directory path\n");
+        exit(0);
+      }
     }
+    tor_data_path[i] = 0x00;
+    fclose(file);
   }
-  tor_data_path[i] = 0x00;
-  fclose(file);
 
 
   /* open tor consensus file */
@@ -287,7 +284,7 @@ int check_ip_is_relay(int ip){
       free(environ_path);
       free(tor_data_path);
       free(buf);
-      printf("error parsing environment for tor\n");
+      printf("Error retrieving tor relays consensus file\n");
       exit(0);
     }
   }
